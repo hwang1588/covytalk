@@ -25,6 +25,9 @@ $pc: 1199.8px; //pc
 // :root{
 // font-size: 10px;
 // }
+ul{
+    margin-bottom: 0;
+}
 body {
     background-color: black;
     @include fs-(70);
@@ -32,6 +35,10 @@ body {
 
 //////////////
 //폰트사이즈:s
+
+.text-center{
+    text-align: center;
+}
 
 .fs-40{
     @include fs-(40);
@@ -67,23 +74,39 @@ body {
 //////////////
 //폰트컬러:s
 
-.fc-white{
+.fc{
+&-white{
     font-weight: bold;
     color: white;
     text-shadow: 3px 3px 5px black;
 }
 
+&-kakao{
+    color:rgb(255, 222, 32);
+}
+
+&-black{
+    color: #333333 !important
+}
+}
 //폰트컬러:e
 //////////////
 
-.section-1{
+.section{
+
+&-1{
     background: linear-gradient(90deg, rgb(255, 222, 32) 0%, rgba(0,212,255,1) 100%);
     background-color:rgb(255, 222, 32);
     @include py-(40);
 }
 
-.section-2{
+&-2{
     background-color:#090909;
+}
+&-3{
+    @include pt-(200);
+    background-color:#090909;
+}
 }
 
 .img{
@@ -97,6 +120,16 @@ body {
     margin: 20px;
     width: 50vw;
 }
+
+&-diamond{
+    margin: 20px 20px 10px 20px;
+    width: 5vw;
+}
+
+&-footer{
+    margin: 20px 20px 0px 20px;
+    width: 50vw;
+}
 }
 
 
@@ -108,6 +141,12 @@ body {
     background-color: #050033;
     margin-top: 5px;
 }
+
+.bg-kakao-gradient{
+    background: linear-gradient(90deg, rgb(255, 222, 32) 0%, rgb(255, 240, 101) 100%);
+
+}
+
 
 .container {
     @include mx-(auto);
@@ -143,6 +182,9 @@ letter-spacing: 10px;
     flex-wrap: wrap;
     & .box-50per {
         width: 50%;
+    }
+    & .box-100per {
+        width: 100%;
     }
 }
 
