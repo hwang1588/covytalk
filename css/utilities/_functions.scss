@@ -1,0 +1,36 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+@use "sass:math";
+//_size는 해당 정의할 화면 사이즈에 최대값을 기준으로 기입한다.
+//_functions.scss(vw, rem =>px)
+$SM_SIZE:                       400; //max-width: 767
+$MD_SIZE:                       1200; //min-width: 768, max-width: 1199
+$XL_SIZE:                       1920; //min-width: 1200 (x2)
+$root_px:                       1;    //100프로(기본 브라우저별 지정 px값 150%= 1.5)
+
+//px -> vw
+@function GET_SM_VW($px_size) {
+  @return math.div($px_size * 100, $SM_SIZE) * 1vw;
+}
+
+@function GET_MD_VW($px_size) {
+  @return math.div($px_size * 100, $MD_SIZE) * 1vw;
+}
+
+@function GET_XL_VW($px_size) {
+  @return math.div($px_size * 100, $XL_SIZE * 2) * 1vw;
+}
+
+//px -> rem
+@function rem-($px_size) {
+  @return math.div($root_px * $px_size) * 1rem;
+}
+
+@function md-rem($px_size) {
+  @return math.div($root_px * $px_size) * 1rem;
+}
+
+@function xl-rem-($px_size) {
+  @return math.div($root_px * $px_size) * 1rem;
+}

@@ -1,0 +1,658 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass helpers.
+// -----------------------------------------------------------------------------
+@use "sass:map";
+
+$fs: ("sm": 12px, "md": 18px, "lg": 24px);
+.test{
+    width: map.get($fs, "lg");
+}//.test{width:12px}
+
+$size: 1000;
+//unquote() => 내부 따옴표 제거, 사용시 #{$sample} => sample
+$sample: unquote("sample");
+
+@mixin scheme-light {
+  //사용자 시스템이 라이트 모드면 적용
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
+
+@mixin scheme-dark {
+  //사용자 시스템이 다크 모드면 적용
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+
+
+}
+//----------적용 및 결과-------------
+//.test{
+//    @include scheme-dark{
+//        background-color: red;
+//    }
+//}
+//------------컴파일후
+//@media (prefers-color-scheme: dark) {
+//  .test {
+//    background-color: red;
+//  }
+//}
+
+
+@mixin size-mobile {
+  @content;
+}
+
+@mixin size-pad {
+  @media (min-width: $pad) {
+    @content;
+  }
+}
+@mixin size-pc {
+  @media (min-width: $pc) {
+    @content;
+  }
+}
+
+@mixin bg-($val) {
+  @if $val == #{dark-0} {
+    background-color: #000000 !important;
+  } @else if $val == #{dark-1} {
+    background-color: #111111 !important;
+  } @else if $val == #{dark-2} {
+    background-color: #222222 !important;
+  } @else if $val == #{dark-3} {
+    background-color: #333333 !important;
+  } @else if $val == #{dark-4} {
+    background-color: #444444 !important;
+  } @else if $val == #{dark-5} {
+    background-color: #555555 !important;
+  } @else if $val == #{dark-6} {
+    background-color: #666666 !important;
+  } @else if $val == #{dark-7} {
+    background-color: #777777 !important;
+  } @else if $val == #{dark-8} {
+    background-color: #888888 !important;
+  } @else if $val == #{dark-9} {
+    background-color: #999999 !important;
+  } 
+}
+
+@mixin d-($val) {
+  @if $val == inline {
+    display: inline !important;
+  } @else if $val == inline-block {
+    display: inline-block !important;
+  } @else if $val == block {
+    display: block !important;
+  } @else if $val == grid {
+    display: grid !important;
+  } @else if $val == flex {
+    display: flex !important;
+  } @else if $val == inline-flex {
+    display: inline-flex !important;
+  } @else if $val == none {
+    display: none !important;
+  }
+}
+
+@mixin flex-($val) {
+  @if $val == row {
+    flex-direction: row !important;
+  } @else if $val == row-reverse {
+    flex-direction: row-reverse !important;
+  } @else if $val == column {
+    flex-direction: column !important;
+  } @else if $val == column-reverse {
+    flex-direction: column-reverse !important;
+  } @else if $val == wrap {
+    flex-direction: wrap !important;
+  } @else if $val == wrap-reverse {
+    flex-direction: wrap-reverse !important;
+  } @else if $val == nowrap {
+    flex-direction: nowrap !important;
+  }
+}
+
+@mixin justify-content-($val) {
+  @if $val == start {
+    justify-content: flex-start !important;
+  } @else if $val == end {
+    justify-content: flex-end !important;
+  } @else if $val == center {
+    justify-content: center !important;
+  } @else if $val == between {
+    justify-content: space-between !important;
+  } @else if $val == around {
+    justify-content: space-around !important;
+  } @else if $val == evenly {
+    justify-content: space-evenly !important;
+  }
+}
+
+@mixin align-items-($val) {
+  @if $val == start {
+    align-items: flex-start !important;
+  } @else if $val == end {
+    align-items: flex-end !important;
+  } @else if $val == center {
+    align-items: center !important;
+  } @else if $val == baseline {
+    align-items: baseline !important;
+  } @else if $val == stretch {
+    align-items: stretch !important;
+  }
+}
+
+@mixin align-content-($val) {
+  @if $val == start {
+    align-content: flex-start !important;
+  } @else if $val == end {
+    align-content: flex-end !important;
+  } @else if $val == center {
+    align-content: center !important;
+  } @else if $val == between {
+    align-content: space-between !important;
+  } @else if $val == around {
+    align-content: space-around !important;
+  } @else if $val == stretch {
+    align-content: stretch !important;
+  }
+}
+
+@mixin align-self-($val) {
+  @if $val == auto {
+    align-self: auto !important;
+  } @else if $val == start {
+    align-self: flex-start !important;
+  } @else if $val == end {
+    align-self: flex-end !important;
+  } @else if $val == center {
+    align-self: center !important;
+  } @else if $val == baseline {
+    align-self: baseline !important;
+  } @else if $val == stretch {
+    align-self: stretch !important;
+  }
+}
+
+//margin
+@mixin m-($val) {
+  @if $val == 0 {
+    margin: 0 !important;
+  } @else if $val == auto {
+    margin: auto !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//margin-left, margin-right
+@mixin mx-($val) {
+  @if $val == 0 {
+    margin: {
+      left: 0 !important;
+      right: 0 !important;
+    }
+  } @else if $val == auto {
+    margin: {
+      left: auto !important;
+      right: auto !important;
+    }
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin: {
+        left: calc(1 * $i) * 0.1rem;
+        right: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+//margin-top, margin-bottom
+@mixin my-($val) {
+  @if $val == 0 {
+    margin: {
+      top: 0 !important;
+      bottom: 0 !important;
+    }
+  } @else if $val == auto {
+    margin: {
+      top: auto !important;
+      bottom: auto !important;
+    }
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin: {
+        top: calc(1 * $i) * 0.1rem;
+        bottom: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+//margin-left
+@mixin ml-($val) {
+  @if $val == 0 {
+    margin-left: 0 !important;
+  } @else if $val == auto {
+    margin-left: auto !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin-left: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//margin-right
+@mixin mr-($val) {
+  @if $val == 0 {
+    margin-right: 0 !important;
+  } @else if $val == auto {
+    margin-right: auto !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin-right: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//margin-top
+@mixin mt-($val) {
+  @if $val == 0 {
+    margin-top: 0 !important;
+  } @else if $val == auto {
+    margin-top: auto !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin-top: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//margin-bottom
+@mixin mb-($val) {
+  @if $val == 0 {
+    margin-bottom: 0 !important;
+  } @else if $val == auto {
+    margin-bottom: auto !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      margin-bottom: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//padding
+@mixin p-($val) {
+  @if $val == 0 {
+    padding: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//padding-left, padding-right
+@mixin px-($val) {
+ @if $val == 0 {
+    padding: {
+      left: 0 !important;
+      right: 0 !important;
+    }
+  } 
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding: {
+        left: calc(1 * $i) * 0.1rem;
+        right: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+//padding-top, padding-bottom
+@mixin py-($val) {
+  @if $val == 0 {
+    padding: {
+      top: 0 !important;
+      bottom: 0 !important;
+    }
+  } 
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding: {
+        top: calc(1 * $i) * 0.1rem;
+        bottom: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+//padding-left
+@mixin pl-($val) {
+  @if $val == 0 {
+    padding-left: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding-left: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//padding-right
+@mixin pr-($val) {
+  @if $val == 0 {
+    padding-right: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding-right: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//padding-top
+@mixin pt-($val) {
+  @if $val == 0 {
+    padding-top: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding-top: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//padding-bottom
+@mixin pb-($val) {
+  @if $val == 0 {
+    padding-bottom: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      padding-bottom: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//width
+@mixin w-($val) {
+  @if $val == 0 {
+    width: {
+      width: 0 !important;
+    }
+  } @else if $val == auto {
+    width: {
+      width: auto !important;
+    }
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      width: {
+        width: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+//height
+@mixin h-($val) {
+  @if $val == 0 {
+    height: {
+      height: 0 !important;
+    }
+  } @else if $val == auto {
+    height: {
+      height: auto !important;
+    }
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      height: {
+        height: calc(1 * $i) * 0.1rem;
+      }
+    }
+  }
+}
+
+
+//font-size
+@mixin fs-($val) {
+  @if $val == 0 {
+    font-size: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      font-size: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//line-height
+@mixin lh-($val) {
+  @if $val == 0 {
+    line-height: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      line-height: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//letter-spacing
+@mixin ls-($val) {
+  @if $val == 0 {
+    letter-spacing: 0 !important;
+  }
+  @for $i from 1 through $size {
+    @if $val == $i {
+      letter-spacing: calc(1 * $i) * 0.1rem;
+    }
+  }
+}
+
+//md
+@mixin md-d-($val) {
+  @include d-($val);
+}
+
+@mixin md-flex-($val) {
+  @include flex-($val);
+}
+
+@mixin md-justify-content-($val) {
+  @include justify-content-($val);
+}
+
+@mixin md-align-items-($val) {
+  @include align-items-($val);
+}
+
+@mixin md-align-content-($val) {
+  @include align-content-($val);
+}
+
+@mixin md-align-self-($val) {
+  @include align-self-($val);
+}
+
+@mixin md-order-first {
+  @include order-first-($val);
+}
+
+@mixin md-m-($val) {
+  @include m-($val);
+}
+
+@mixin md-mx-($val) {
+  @include mx-($val);
+}
+
+@mixin md-my-($val) {
+  @include my-($val);
+}
+
+@mixin md-ml-($val) {
+  @include ml-($val);
+}
+
+@mixin md-mr-($val) {
+  @include mr-($val);
+}
+
+@mixin md-mt-($val) {
+  @include mt-($val);
+}
+
+@mixin md-mb-($val) {
+  @include mb-($val);
+}
+
+@mixin md-p-($val) {
+  @include p-($val);
+}
+
+@mixin md-px-($val) {
+  @include px-($val);
+}
+
+@mixin md-py-($val) {
+  @include py-($val);
+}
+
+@mixin md-pl-($val) {
+  @include pl-($val);
+}
+
+@mixin md-pr-($val) {
+  @include pr-($val);
+}
+
+@mixin md-pt-($val) {
+  @include pt-($val);
+}
+
+@mixin md-fs-($val) {
+  @include fs-($val);
+}
+
+@mixin md-lh-($val) {
+  @include lh-($val);
+}
+
+@mixin md-ls-($val) {
+  @include ls-($val);
+}
+
+//xl
+@mixin xl-d-($val) {
+  @include d-($val);
+}
+
+@mixin xl-flex-($val) {
+  @include flex-($val);
+}
+
+@mixin xl-justify-content-($val) {
+  @include justify-content-($val);
+}
+
+@mixin xl-align-items-($val) {
+  @include align-items-($val);
+}
+
+@mixin xl-align-content-($val) {
+  @include align-content-($val);
+}
+
+@mixin xl-align-self-($val) {
+  @include align-self-($val);
+}
+
+@mixin xl-order-first {
+  @include order-first-($val);
+}
+
+@mixin xl-m-($val) {
+  @include m-($val);
+}
+
+@mixin xl-mx-($val) {
+  @include mx-($val);
+}
+
+@mixin xl-my-($val) {
+  @include my-($val);
+}
+
+@mixin xl-ml-($val) {
+  @include ml-($val);
+}
+
+@mixin xl-mr-($val) {
+  @include mr-($val);
+}
+
+@mixin xl-mt-($val) {
+  @include mt-($val);
+}
+
+@mixin xl-mb-($val) {
+  @include mb-($val);
+}
+
+@mixin xl-p-($val) {
+  @include p-($val);
+}
+
+@mixin xl-px-($val) {
+  @include px-($val);
+}
+
+@mixin xl-py-($val) {
+  @include py-($val);
+}
+
+@mixin xl-pl-($val) {
+  @include pl-($val);
+}
+
+@mixin xl-pr-($val) {
+  @include pr-($val);
+}
+
+@mixin xl-pt-($val) {
+  @include pt-($val);
+}
+
+@mixin xl-pb-($val) {
+  @include pb-($val);
+}
+
+@mixin xl-fs-($val) {
+  @include fs-($val);
+}
+
+@mixin xl-lh-($val) {
+  @include lh-($val);
+}
+
+@mixin xl-ls-($val) {
+  @include ls-($val);
+}

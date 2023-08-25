@@ -1,0 +1,24 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+// 색상
+$color-black-100:                   #000000;
+$color-white-100:                   #ffffff;
+
+
+:root {
+  --custom-gutter-x: 1.5rem;
+  --custom-gutter-y: 0;
+}
+
+html[data-theme="light"] {
+  --light-theme-bg-color: #{$color-white-100};
+  --light-theme-color: #{$color-black-100};
+}
+
+html[data-theme="dark"], html[data-theme="black"] {
+  --dark-theme-bg-color: #{$color-black-100};
+  --dark-theme-color: #{$color-white-100};
+}
+

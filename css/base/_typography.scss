@@ -1,0 +1,14 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide typography reset.
+// -----------------------------------------------------------------------------
+/**
+ * Basic typography style for copy text
+ */
+
+// default
+//@import 'https://fonts.googleapis.com/earlyaccess/notosanskr.css';
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  font-family: "Noto Sans KR", sans-serif !important;
+}

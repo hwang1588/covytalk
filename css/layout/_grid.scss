@@ -1,0 +1,121 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide gri reset.
+// -----------------------------------------------------------------------------
+// grid.scss
+$col:                           8.333333333333%;
+$max-zone:                      12;
+$max-equal-zone:                30;
+$max-order:                     6;
+
+
+@mixin container-full {
+  width: 100%;
+  padding-right: calc(var(--custom-gutter-x) * 0.5);
+  padding-left: calc(var(--custom-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin row {
+  display: flex;
+  flex-wrap: wrap;
+  // wrap= zone이 row영역보다 크면 밑으로 넘어감
+  // nowrap= zone이 row영역보다 크면 row영역을 뚫고나감
+  margin-top: calc(-1 * var(--custom-gutter-y));
+  > * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-top: var(--custom-gutter-y);
+  }
+}
+
+@mixin zone {
+  flex: 1 0 0;
+  // grow, shrink, basis
+  // grow= row에 공간이 남을경우 0= 'width' 값으로 표현 1= grow됨(꽉채움)
+  // shrink= row에 공간이 없을경우 0=뚫고나감, 1= shrink됨(축소됨)
+  // basis= flex-direction에따라 정의되는 기본 크기 0= 크기 미정의, auto= 'width'로 크기조정
+}
+
+//zone-1 ~ 12
+@mixin zone-($val) {
+  @if $val == auto {
+    flex: 0 0 auto;
+    width: auto !important;
+  }
+  //$val = 1 ~ 12
+  @for $i from 1 through $max-zone {
+    //$i = 1 ~ 12, $max-zone = 12
+    @if $val == $i {
+      //$val, $i = 1 ~ 12
+      flex: 0 0 auto;
+      width: calc($col * $i);
+      //$col = 8.333%, $i = 1 ~ 12
+    }
+  }
+}
+
+//calc(100 / $i) = (*just use equal size 동일한 사이즈의 홀수 갯수일때 활용가능)
+@mixin equal-zone-($val) {
+  //$val = 1 ~ 30
+  @for $i from 1 through $max-equal-zone {
+    //$i = 1 ~ 12, $max-zone = 30
+    @if $val == $i {
+      //$val, $i = 1 ~ 30
+      flex: 0 0 auto;
+      width: calc(100% / $i);
+      //$i = 1 ~ 30
+    }
+  }
+}
+
+//order-0 ~ 6
+@mixin order-($val) {
+  @for $i from 1 through $max-order {
+    @if $val == $i {
+      order: $i;
+    }
+  }
+}
+
+//md
+@mixin md-zone {
+  flex: 1 0 0%;
+}
+
+//zone-1 ~ 12
+@mixin md-zone-($val) {
+  @include zone-($val);
+}
+
+//zone-1 ~ 30
+@mixin md-equal-zone-($val) {
+  @include equal-zone-($val);
+}
+
+//order-0 ~ 6
+@mixin md-order-($val) {
+  @include order-($val);
+}
+
+//xl
+@mixin xl-zone {
+  flex: 1 0 0%;
+}
+
+//zone-1 ~ 12
+@mixin xl-zone-($val) {
+  @include zone-($val);
+}
+
+//zone-1 ~ 30
+@mixin xl-equal-zone-($val) {
+  @include equal-zone-($val);
+}
+
+//order-0 ~ 6
+@mixin xl-order-($val) {
+  @include order-($val);
+}

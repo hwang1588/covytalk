@@ -1,0 +1,170 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass.
+// -----------------------------------------------------------------------------
+@charset "utf-8";
+//Base
+@use "base/reset" as *;
+@use "base/typography" as *;
+//Utilties
+@use "utilities/mixins" as *;
+@use "utilities/helpers-vw" as *;
+//@use "utilities/helpers-rem-vw" as *; //rem, vw 단위 사용시 필요한 시트
+//Layout
+@use "layout/grid" as *;
+//Custom (*always last import)
+@use "utilities/functions" as *;
+
+$pad: 767.8px; //pad
+$pc: 1199.8px; //pc
+
+//=============
+//전역 start
+//=============
+
+//rem 사용시 필요한 스타일
+// :root{
+// font-size: 10px;
+// }
+body {
+    background-color: black;
+    @include fs-(70);
+}
+
+//////////////
+//폰트사이즈:s
+
+.fs-40{
+    @include fs-(40);
+}
+
+.fs-50{
+    @include fs-(50);
+}
+
+.fs-100{
+    @include fs-(100);
+}
+
+.fs-130{
+    @include fs-(130);
+}
+
+.fw-{
+
+&bold{
+    font-weight: 800 !important;
+}
+
+&600{
+    font-weight: 600 !important;
+
+}
+
+}
+//폰트사이즈:e
+//////////////
+
+//////////////
+//폰트컬러:s
+
+.fc-white{
+    font-weight: bold;
+    color: white;
+    text-shadow: 3px 3px 5px black;
+}
+
+//폰트컬러:e
+//////////////
+
+.section-1{
+    background: linear-gradient(90deg, rgb(255, 222, 32) 0%, rgba(0,212,255,1) 100%);
+    background-color:rgb(255, 222, 32);
+    @include py-(40);
+}
+
+.img{
+&-bg{
+    margin: 20px;
+    width: 20vw;
+    filter: drop-shadow(0px 0px 50px white);
+}
+
+&-trade{
+    margin: 20px;
+    width: 30vw;
+}
+}
+
+
+.btn-go{
+    border-radius: 30px;
+    border-color: transparent;
+    color: white;
+    width: 30vw;
+    background-color: #050033;
+    margin-top: 5px;
+}
+
+.container {
+    @include mx-(auto);
+    max-width: 800px;
+}
+
+.text-group {
+    @include d-(flex);
+    @include align-items-(center);
+    @include mb-(0);
+    flex-direction: column;
+    &__fc-gold {
+        display: inline;
+        background: linear-gradient(90deg, rgb(156, 112, 29) 0%, rgb(255, 236, 138) 20% 80%, rgb(156, 112, 29) 100%);
+        /* linear-gradient(90deg, rgba(255,0,0,.8), rgba(255,0,0,0) 0%),
+    linear-gradient(90deg, rgba(0,255,0,.8), rgba(0,255,0,0) 50%),
+    linear-gradient(90deg, rgba(0,0,255,.8), rgba(0,0,255,0) 100%); */
+        color: transparent;
+        -webkit-background-clip: text;
+    }
+}
+
+.text-spacing{
+    @include mt-(100);
+    @include fs-(40);
+    font-weight: bold;
+letter-spacing: 10px;
+}
+
+
+.box-group {
+    @include d-(flex);
+    flex-wrap: wrap;
+    & .box-50per {
+        width: 50%;
+    }
+}
+
+.test {
+    @include mt-(1);
+
+    &__test2 {
+        @include pt-(1);
+    }
+}
+//=============
+//'%pad' start
+//=============
+@media (min-width: $pad) {
+    //rem 사용시 필요한 스타일
+    //:root{
+    //font-size: 16px;
+    //}
+}
+
+//=============
+//'%pc' start
+//=============
+@media (min-width: $pc) {
+    //rem 사용시 필요한 스타일
+    //:root{
+    //font-size: 16px;
+    //}
+}
