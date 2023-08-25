@@ -82,6 +82,10 @@ body {
     @include py-(40);
 }
 
+.section-2{
+    background-color:#090909;
+}
+
 .img{
 &-bg{
     margin: 20px;
@@ -91,7 +95,7 @@ body {
 
 &-trade{
     margin: 20px;
-    width: 30vw;
+    width: 50vw;
 }
 }
 
